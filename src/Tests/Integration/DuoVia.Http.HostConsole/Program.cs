@@ -19,7 +19,11 @@ namespace DuoVia.Http.HostConsole
             var test = new MyTest();
             ServiceHost.AddService<IMyTest>(test);
 
-            using (WebApp.Start<Startup>(new StartOptions(baseUrl) { ServerFactory = "Microsoft.Owin.Host.HttpListener" }))
+            var options = new StartOptions(baseUrl)
+            {
+                ServerFactory = "Microsoft.Owin.Host.HttpListener"
+            };
+            using (WebApp.Start<Startup>(options))
             {
                 // Launch the browser
                 //Process.Start(baseUrl + "metadata");
