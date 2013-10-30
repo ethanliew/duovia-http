@@ -10,6 +10,9 @@
     <projectUrl>http://katanaproject.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Includes components needed to host an OWIN-based application in a custom process.</description>
+    <releaseNotes />
+    <copyright />
+    <language />
     <tags>Microsoft OWIN</tags>
     <dependencies>
       <dependency id="Owin" version="1.0" />
