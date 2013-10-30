@@ -6,11 +6,17 @@ DuoVia.Http
 ### An OWIN-based Lightweight Services Library for .NET.
 
 > Based on the feature set of [DuoVia.Net][1] but with a focus on using HTTP via [OWIN][2] with JSON rather than binary serialization. Initial testing shows that this library keeps pace with the binary serialization. This is in large part due to the use the ultra-fast ServiceStack.Text serializer.
+
 > There are two NuGet libraries that you will need. The client proxy library [DuoVia.Http][3] and the OWIN hosting library [DuoVia.Http.Host][4]. 
+
 > The host exposes a raw "metadata" endpoint that defines the services being hosted, their operations and their parameters in JSON. In the future we want to add a nice HTML response when the Accept header is not application/json.
+
 > While not recommended, this allows you to build your own client or access your service with a non-.NET client. 
+
 > And one very cool thing you probably won't find in any other RPC-style library is support for method overloads and out and ref parameters.
+
 > Using the library is easy. Write your interface and DTO's into one assembly and your implementation into another assembly. This allows you to avoid distributing your implementation to clients.
+
 > Now just hook up the host and the client as shown below. Check out the integration projects. Also note that you will need the OWIN self host NuGet package to create a similar console app that hosts your service.
  
 First, your code that hosts your service.
