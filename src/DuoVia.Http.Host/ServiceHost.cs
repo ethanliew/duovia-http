@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Owin;
-using Owin;
 using System.Reflection;
+using Microsoft.Owin;
 using ServiceStack.Text;
 
 namespace DuoVia.Http.Host
@@ -28,29 +23,7 @@ namespace DuoVia.Http.Host
 
         private static ConcurrentDictionary<string, ServiceInstance> _services = new ConcurrentDictionary<string, ServiceInstance>(); 
 
-        public void Configuration(IAppBuilder app)
-        {
-            app.Run(Invoke);
-        }
-
-        // Invoked once per request.
-        public Task Invoke(IOwinContext context)
-        {
-            if (context.Request.Path.HasValue)
-            {
-                if (context.Request.Path.Value.StartsWith("/app") && context.Request.Method == "POST")
-                {
-                    return HandleOperationRequest(context);
-                }
-                else if (context.Request.Path.Value.StartsWith("/metadata"))
-                {
-                    return HandleMetadataRequest(context);
-                }
-            }
-            return Handle404Request(context);
-        }
-
-        private Task Handle404Request(IOwinContext context)
+        public Task Handle404Request(IOwinContext context)
         {
             context.Response.ContentType = "text/plain";
             context.Response.StatusCode = 404;
@@ -58,7 +31,7 @@ namespace DuoVia.Http.Host
             return context.Response.WriteAsync("Unable to locate requested resource.");
         }
 
-        private Task HandleMetadataRequest(IOwinContext context)
+        public Task HandleMetadataRequest(IOwinContext context)
         {
             context.Response.ContentType = "application/json";
             var serviceMetadata = (from n in _services select n.Value.ServiceMetadata).ToArray();
@@ -124,6 +97,7 @@ namespace DuoVia.Http.Host
         {
             if (null == service) throw new NullReferenceException("service");
             var serviceType = typeof (TService);
+            if (!serviceType.IsInterface) throw new TypeAccessException("TService must be an interface.");
             var serviceKey = serviceType.AssemblyQualifiedName ?? serviceType.Name;
             if (_services.ContainsKey(serviceKey)) throw new Exception("Service already added. Only one instance allowed.");
             var instance = CreateMethodMap(serviceKey, serviceType, service);

@@ -17,6 +17,7 @@ namespace DuoVia.Http.TestConsole
             Console.WriteLine(name);
             Console.WriteLine(sot);
 
+            Console.WriteLine("Press Any Key To Exit");
             Console.ReadKey();
         }
     }
