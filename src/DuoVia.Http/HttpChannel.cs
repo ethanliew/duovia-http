@@ -31,7 +31,7 @@ namespace DuoVia.Http
         protected override void SyncInterface(Type serviceType)
         {
             HttpWebRequest web = PrepareMetadataRequest();
-            var webResponse = (HttpWebResponse)web.GetResponse();
+            var webResponse = (HttpWebResponse) web.GetResponse();
             if (webResponse.StatusCode == HttpStatusCode.OK)
             {
                 using (var responseStream = webResponse.GetResponseStream())
@@ -49,7 +49,7 @@ namespace DuoVia.Http
             }
             else
             {
-                throw new System.Web.HttpException((int)webResponse.StatusCode, webResponse.StatusDescription);
+                throw new System.Web.HttpException((int) webResponse.StatusCode, webResponse.StatusDescription);
             }
         }
 
@@ -96,7 +96,8 @@ namespace DuoVia.Http
                 }
 
                 if (ident < 0)
-                    throw new Exception(string.Format("Cannot match method '{0}' to its server side equivalent", callingMethod.Name));
+                    throw new Exception(string.Format("Cannot match method '{0}' to its server side equivalent",
+                        callingMethod.Name));
 
                 var request = new DvRequest()
                 {
@@ -111,28 +112,35 @@ namespace DuoVia.Http
             }
 
             //execute request with call to GetResponse
-            var webResponse = (HttpWebResponse)web.GetResponse();
-            if (webResponse.StatusCode == HttpStatusCode.OK)
+            var webResponse = (HttpWebResponse) web.GetResponse();
+            try
             {
-                using (var responseStream = webResponse.GetResponseStream())
+                if (webResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    var dvResponse = JsonSerializer.DeserializeFromStream<DvResponse>(responseStream);
-                    if (dvResponse.Exception != null) throw dvResponse.Exception;
-                    object[] result = new object[dvResponse.Parameters.Length + 1];
-                    result[0] = dvResponse.ReturnValue;
-                    for (int i = 0; i < dvResponse.Parameters.Length; i++) result[i + 1] = dvResponse.Parameters[i];
-                    return result;
+                    using (var responseStream = webResponse.GetResponseStream())
+                    {
+                        var dvResponse = JsonSerializer.DeserializeFromStream<DvResponse>(responseStream);
+                        if (dvResponse.Exception != null) throw dvResponse.Exception;
+                        object[] result = new object[dvResponse.Parameters.Length + 1];
+                        result[0] = dvResponse.ReturnValue;
+                        for (int i = 0; i < dvResponse.Parameters.Length; i++) result[i + 1] = dvResponse.Parameters[i];
+                        return result;
+                    }
+                }
+                else
+                {
+                    throw new System.Web.HttpException((int) webResponse.StatusCode, webResponse.StatusDescription);
                 }
             }
-            else
+            finally
             {
-                throw new System.Web.HttpException((int)webResponse.StatusCode, webResponse.StatusDescription);
+                webResponse.Close();
             }
         }
 
         private HttpWebRequest PrepareAppRequest()
         {
-            var web = (HttpWebRequest)WebRequest.Create(new Uri(_endpoint, "/app"));
+            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint, "/app"));
             web.ContentType = "application/json";
             web.Accept = "application/json";
             web.Method = "POST";
@@ -141,39 +149,11 @@ namespace DuoVia.Http
 
         private HttpWebRequest PrepareMetadataRequest()
         {
-            var web = (HttpWebRequest)WebRequest.Create(new Uri(_endpoint, "/metadata"));
+            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint, "/metadata"));
             web.ContentType = "application/json";
             web.Accept = "application/json";
             web.Method = "GET";
             return web;
         }
-
-
-        #region IDisposable override
-
-        protected override void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                _disposed = true; //prevent second call to Dispose
-                if (disposing)
-                {
-                    //try
-                    //{
-                    //    _binWriter.Write((int)MessageType.TerminateConnection);
-                    //    _binWriter.Flush();
-                    //    _stream.Flush();
-                    //}
-                    //finally
-                    //{
-                    //    if (null != _binWriter) _binWriter.Dispose();
-                    //    if (null != _binReader) _binReader.Dispose();
-                    //    if (null != _stream) _stream.Dispose();
-                    //}
-                }
-            }
-        }
-
-        #endregion
     }
 }

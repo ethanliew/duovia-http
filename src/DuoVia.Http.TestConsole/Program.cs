@@ -10,13 +10,12 @@ namespace DuoVia.Http.TestConsole
     {
         static void Main(string[] args)
         {
-            using (var client = new Client<IMyTest>(new Uri("http://localhost:12345/")))
-            {
-                var name = client.Proxy.GetName("heyhey");
-                Console.WriteLine(name);
-                var sot = client.Proxy.DoSomething("today");
-                Console.WriteLine(sot);
-            }
+            var client = Client.Create<IMyTest>(new Uri("http://localhost:12345/"));
+            var name = client.GetName("heyhey");
+            var sot = client.DoSomething("today");
+
+            Console.WriteLine(name);
+            Console.WriteLine(sot);
 
             Console.ReadKey();
         }

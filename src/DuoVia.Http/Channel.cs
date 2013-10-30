@@ -2,7 +2,7 @@ using System;
 
 namespace DuoVia.Http
 {
-    public abstract class Channel : IDisposable
+    public abstract class Channel
     {
         protected Type _serviceType;
 
@@ -20,20 +20,5 @@ namespace DuoVia.Http
         /// names and -parameter types. This is used when invoking methods server side.
         /// </summary>
         protected abstract void SyncInterface(Type serviceType);
-
-        #region IDisposable Members
-
-        protected bool _disposed = false;
-
-        public void Dispose()
-        {
-            //MS recommended dispose pattern - prevents GC from disposing again
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected abstract void Dispose(bool disposing);
-
-        #endregion
     }
 }
