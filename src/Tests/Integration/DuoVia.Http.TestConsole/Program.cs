@@ -10,7 +10,7 @@ namespace DuoVia.Http.TestConsole
     {
         static void Main(string[] args)
         {
-            var client = Client.Create<IMyTest>(new Uri("http://localhost:12345/"));
+            var client = HttpClient.Create<IMyTest>(new Uri("http://localhost:12345/"));
             var name = client.GetName("heyhey");
             var sot = client.DoSomething("today");
 

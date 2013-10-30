@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DuoVia.Http.TestConsole")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DuoVia.Http.TestShared")]
+[assembly: AssemblyDescription("An OWIN-based Lightweight Services Library for .NET.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DuoVia.Http.TestConsole")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("DuoVia.Http.TestShared")]
+[assembly: AssemblyCopyright("Copyright © 2008-2013 Duovia Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("02ccff9f-578e-4bf6-9ee0-4bd2b9651e30")]
+[assembly: Guid("3032fcf2-a394-4c28-b25a-285750b15487")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,6 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

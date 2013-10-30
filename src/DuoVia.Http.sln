@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http", "DuoVia.Http\DuoVia.Http.csproj", "{653F4074-138F-46DA-B32B-2187DF2584D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.HostConsole", "DuoVia.Http.HostConsole\DuoVia.Http.HostConsole.csproj", "{F26C0080-FB37-4D81-A53E-8B52A5A613E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.HostConsole", "Tests\Integration\DuoVia.Http.HostConsole\DuoVia.Http.HostConsole.csproj", "{F26C0080-FB37-4D81-A53E-8B52A5A613E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.Host", "DuoVia.Http.Host\DuoVia.Http.Host.csproj", "{E59C4DF9-0787-4A01-9FDC-F26560798B15}"
 EndProject
@@ -14,9 +14,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{56728E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.TestShared", "DuoVia.Http.TestShared\DuoVia.Http.TestShared.csproj", "{6AB927F3-1F52-429E-ADA3-8C09F7A490E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.TestShared", "Tests\Integration\DuoVia.Http.TestShared\DuoVia.Http.TestShared.csproj", "{6AB927F3-1F52-429E-ADA3-8C09F7A490E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.TestConsole", "DuoVia.Http.TestConsole\DuoVia.Http.TestConsole.csproj", "{D78B1F76-F3BC-48D4-951A-D27E5349188F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.Http.TestConsole", "Tests\Integration\DuoVia.Http.TestConsole\DuoVia.Http.TestConsole.csproj", "{D78B1F76-F3BC-48D4-951A-D27E5349188F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".SolutionItems", "{C07EF98D-9267-4971-91E1-DDC00834A084}"
+	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Tests", ".Tests", "{A8FB4CFA-CF37-4C45-959B-FE3E41084C02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{221DE769-E082-4DFC-9C43-86C68A89D9A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,5 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{221DE769-E082-4DFC-9C43-86C68A89D9A8} = {A8FB4CFA-CF37-4C45-959B-FE3E41084C02}
+		{F26C0080-FB37-4D81-A53E-8B52A5A613E1} = {221DE769-E082-4DFC-9C43-86C68A89D9A8}
+		{D78B1F76-F3BC-48D4-951A-D27E5349188F} = {221DE769-E082-4DFC-9C43-86C68A89D9A8}
+		{6AB927F3-1F52-429E-ADA3-8C09F7A490E2} = {221DE769-E082-4DFC-9C43-86C68A89D9A8}
 	EndGlobalSection
 EndGlobal

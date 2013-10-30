@@ -43,7 +43,7 @@
     <Compile Include="Channel.cs" />
     <Compile Include="ExtensionClasses.cs" />
     <Compile Include="HttpChannel.cs" />
-    <Compile Include="Client.cs" />
+    <Compile Include="HttpClient.cs" />
     <Compile Include="HttpProxy.cs" />
     <Compile Include="PooledDictionary.cs" />
     <Compile Include="ProxyFactory.cs" />
