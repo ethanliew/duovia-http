@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
 using ServiceStack.Text;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DuoVia.Http
 {
     public class HttpChannel : Channel
     {
-        private Uri _endpoint = null;
+        private const string APP_JSON = "application/json";
+        private HttpServiceEndPoint _endpoint = null;
         private ServiceMetadata _syncInfo;
 
         /// <summary>
         /// Creates a connection to the concrete object handling method calls on the server side
         /// </summary>
         /// <param name="endpoint"></param>
-        public HttpChannel(Type serviceType, Uri endpoint)
+        public HttpChannel(Type serviceType, HttpServiceEndPoint endpoint)
         {
             _serviceType = serviceType;
             _endpoint = endpoint;
@@ -140,18 +138,18 @@ namespace DuoVia.Http
 
         private HttpWebRequest PrepareAppRequest()
         {
-            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint, "/app"));
-            web.ContentType = "application/json";
-            web.Accept = "application/json";
+            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint.Uri, _endpoint.AppPath));
+            web.ContentType = APP_JSON;
+            web.Accept = APP_JSON;
             web.Method = "POST";
             return web;
         }
 
         private HttpWebRequest PrepareMetadataRequest()
         {
-            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint, "/metadata"));
-            web.ContentType = "application/json";
-            web.Accept = "application/json";
+            var web = (HttpWebRequest) WebRequest.Create(new Uri(_endpoint.Uri, _endpoint.MetadataPath));
+            web.ContentType = APP_JSON;
+            web.Accept = APP_JSON;
             web.Method = "GET";
             return web;
         }

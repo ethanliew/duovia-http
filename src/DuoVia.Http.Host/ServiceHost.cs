@@ -9,21 +9,21 @@ using ServiceStack.Text;
 
 namespace DuoVia.Http.Host
 {
-    public class ServiceHost
+    internal class ServiceInstance
     {
-        private class ServiceInstance
-        {
-            public string ServiceKey { get; set; }
-            public Type InterfaceType { get; set; }
-            public object SingletonInstance { get; set; }
-            public ConcurrentDictionary<int, MethodInfo> InterfaceMethods { get; set; }
-            public ConcurrentDictionary<int, bool[]> MethodParametersByRef { get; set; }
-            public ServiceMetadata ServiceMetadata { get; set; }
-        }
+        public string ServiceKey { get; set; }
+        public Type InterfaceType { get; set; }
+        public object SingletonInstance { get; set; }
+        public ConcurrentDictionary<int, MethodInfo> InterfaceMethods { get; set; }
+        public ConcurrentDictionary<int, bool[]> MethodParametersByRef { get; set; }
+        public ServiceMetadata ServiceMetadata { get; set; }
+    }
 
-        private static ConcurrentDictionary<string, ServiceInstance> _services = new ConcurrentDictionary<string, ServiceInstance>(); 
+    public static class ServiceHost
+    {
+        private static ConcurrentDictionary<string, ServiceInstance> _services = new ConcurrentDictionary<string, ServiceInstance>();
 
-        public Task Handle404Request(IOwinContext context)
+        public static Task Handle404Request(IOwinContext context)
         {
             context.Response.ContentType = "text/plain";
             context.Response.StatusCode = 404;
@@ -31,14 +31,14 @@ namespace DuoVia.Http.Host
             return context.Response.WriteAsync("Unable to locate requested resource.");
         }
 
-        public Task HandleMetadataRequest(IOwinContext context)
+        public static Task HandleMetadataRequest(IOwinContext context)
         {
             context.Response.ContentType = "application/json";
             var serviceMetadata = (from n in _services select n.Value.ServiceMetadata).ToArray();
             return context.Response.WriteAsync(serviceMetadata.SerializeToString());
         }
 
-        public Task HandleOperationRequest(IOwinContext context)
+        public static Task HandleOperationRequest(IOwinContext context)
         {
             var contextLoc = context;
             return Task.Factory.StartNew(() =>
