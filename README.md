@@ -6,7 +6,7 @@ DuoVia.Http
 ### An OWIN-based Lightweight Services Library for .NET.
 
 #### Exciting News 
-DuoVia.Http.Host is now an OWIN middleware component rather than a stand alone app. This makes it easy to use DuoVia.Http side-by-side with other OWIN frameworks and applications. Special thanks to Chris Ross for make the recommendation.
+DuoVia.Http.Host is now an OWIN middleware component rather than a stand alone app. This makes it easy to use DuoVia.Http side-by-side with other OWIN frameworks and applications. Special thanks to Chris Ross for making the recommendation.
 
 > Based on the feature set of [DuoVia.Net][1] but with a focus on using HTTP via [OWIN][2] with JSON rather than binary serialization. Initial testing shows that this library keeps pace with the binary serialization. This is in large part due to the use the ultra-fast ServiceStack.Text serializer.
 
@@ -37,9 +37,6 @@ First, your code that hosts your service.
             var options = new StartOptions(baseUrl);
             using (WebApp.Start<Startup>(options))
             {
-                // Launch the browser
-                //Process.Start(baseUrl + "dv/metadata");
-
                 // Keep the server going until we're done
                 Console.WriteLine("Press Any Key To Exit");
                 Console.ReadKey();
