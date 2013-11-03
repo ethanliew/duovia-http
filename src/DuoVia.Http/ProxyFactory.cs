@@ -6,16 +6,6 @@ using System.Threading;
 
 namespace DuoVia.Http
 {
-    internal sealed class ProxyBuilder
-    {
-        public string ProxyName { get; set; }
-        public Type InterfaceType { get; set; }
-        public Type CtorType { get; set; }
-        public AssemblyBuilder AssemblyBuilder { get; set; }
-        public ModuleBuilder ModuleBuilder { get; set; }
-        public TypeBuilder TypeBuilder { get; set; }
-    }
-
     internal static class ProxyFactory
     {
         private const string PROXY_ASSEMBLY = "ProxyAssembly";

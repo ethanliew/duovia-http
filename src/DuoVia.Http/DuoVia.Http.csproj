@@ -41,14 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Channel.cs" />
-    <Compile Include="ExtensionClasses.cs" />
+    <Compile Include="DefaultTypeMaker.cs" />
+    <Compile Include="DvRequest.cs" />
+    <Compile Include="DvResponse.cs" />
+    <Compile Include="NetExtensions.cs" />
     <Compile Include="HttpChannel.cs" />
     <Compile Include="HttpClient.cs" />
     <Compile Include="HttpProxy.cs" />
     <Compile Include="HttpServiceEndPoint.cs" />
+    <Compile Include="OperationMetadata.cs" />
     <Compile Include="PooledDictionary.cs" />
+    <Compile Include="ProxyBuilder.cs" />
     <Compile Include="ProxyFactory.cs" />
-    <Compile Include="RequestResponseWrappers.cs" />
+    <Compile Include="ServiceMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
